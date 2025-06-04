@@ -4,22 +4,22 @@ get_icon() {
     case $1 in
         01d) icon="" ;; # Clear sky (day) -> Should be  or 
         01n) icon="" ;; # Clear sky (night) -> Should be  or 
-        02d) icon="" ;; # Few clouds (day) -> Should be 
-        02n) icon="" ;; # Few clouds (night) -> Should be 
+        02d) icon="" ;; # Few clouds (day) -> Should be 
+        02n) icon="" ;; # Few clouds (night) -> Should be 
         03d) icon="" ;; # Scattered clouds (day)
         03n) icon="" ;; # Scattered clouds (night)
-        04*) icon="" ;; # Broken clouds -> Should be  or 
-        09d) icon="" ;; # Shower rain (day) -> Should be 
+        04*) icon="" ;; # Broken clouds -> Should be  or 
+        09d) icon="" ;; # Shower rain (day) -> Should be 
         09n) icon="" ;; # Shower rain (night) -> Should be 
-        10d) icon="" ;; # Rain (day) -> Should be 
+        10d) icon="" ;; # Rain (day) -> Should be 
         10n) icon="" ;; # Rain (night) -> Should be 
-        11d) icon="" ;; # Thunderstorm (day) -> Should be 
+        11d) icon="" ;; # Thunderstorm (day) -> Should be 
         11n) icon="" ;; # Thunderstorm (night) -> Should be 
-        13d) icon="" ;; # Snow (day) -> Should be 
+        13d) icon="" ;; # Snow (day) -> Should be 
         13n) icon="" ;; # Snow (night) -> Should be 
         50d) icon="" ;; # Mist (day) -> Should be 
         50n) icon="" ;; # Mist (night) -> Should be 
-        *) icon="" ;; # Unknown condition -> Maybe 
+        *) icon="" ;; # Unknown condition -> Maybe 
     esac
     echo $icon
 }
@@ -55,7 +55,7 @@ if [ -n "$current" ] && [ -n "$forecast" ]; then
     elif [ "$forecast_temp" -gt "$current_temp" ]; then
         trend=""  # Temperature rising (Up arrow)
     else
-        trend="="  # Steady (Equal sign)
+        trend=""  # Steady (Equal sign)
     fi
 
     sun_rise=$(echo "$current" | jq ".sys.sunrise")
@@ -70,7 +70,7 @@ if [ -n "$current" ] && [ -n "$forecast" ]; then
         daytime="  $(get_duration "$((sun_rise-now))")"
     fi
 
-    echo "$(get_icon "$current_icon") $current_temp$SYMBOL  $trend  $(get_icon "$forecast_icon") $forecast_temp$SYMBOL   $daytime"
+    echo "$(get_icon "$current_icon") $current_temp$SYMBOL $trend  $(get_icon "$forecast_icon") $forecast_temp$SYMBOL  $CITY"
 else
     echo "Weather data unavailable"
 fi
